@@ -115,7 +115,7 @@ function comparePrices(a, b, minProfit = 0.025) {
     lastNotification = Date.now();
 
     var fs = require('fs');
-    var stream = fs.createWriteStream("result_xrp.txt");
+    var stream = fs.createWriteStream("./send_message/result_xrp.txt");
     stream.once('open', function (fd) {
         stream.write(`[XRP] ${(profitSellABuyB * 100).toFixed(2)}% profit!! Sell ${a} at ¥${prices[a][1].toFixed(2)}, and buy ${b} at ¥${prices[b][0].toFixed(2)}!!`);
         stream.end();
