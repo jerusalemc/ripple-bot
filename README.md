@@ -2,6 +2,7 @@
 
 ### requirement
 > nodejs 7.x (axios、request、ripple-lib、bignumber.js、forever)
+
 > python 3.6 （itchat）
 
 ### Implemention
