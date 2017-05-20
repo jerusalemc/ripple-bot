@@ -1,0 +1,51 @@
+  const asksFox = RippleOrderBook.createOrderBook(api, {
+    currency_pays: 'CNY',
+    issuer_pays: issuer,
+    currency_gets: 'ETH',
+    issuer_gets: NAMES.gatehubFifthETH,
+  });
+  const bidsFox = RippleOrderBook.createOrderBook(api, {
+    currency_pays: 'ETH',
+    issuer_pays: NAMES.gatehubFifthETH,
+    currency_gets: 'CNY',
+    issuer_gets: issuer,
+  });
+  asksFox.on('model', (offers) => {
+    const average = calcAverage(offers, 15, true);
+    prices[pricePtr][0] = average;
+  });
+  bidsFox.on('model', (offersB) => {
+    const average = calcAverage(offersB, 15, false);
+    prices[pricePtr][1] = average;
+
+    comparePrices(pricePtr, 'yunbi');
+    comparePrices('yunbi', pricePtr);
+
+  });
+
+
+  const asksXRP = RippleOrderBook.createOrderBook(api, {
+    currency_pays: 'CNY',
+    issuer_pays: issuer,
+    currency_gets: 'XRP',
+    issuer_gets: undefined,
+  });
+  const bidsXRP = RippleOrderBook.createOrderBook(api, {
+    currency_pays: 'XRP',
+    issuer_pays: undefined,
+    currency_gets: 'CNY',
+    issuer_gets: issuer,
+  });
+  asksXRP.on('model', (offers) => {
+    const average = calcAverage(offers, 20000, true);
+    console.log('average: ' + average.toString())
+    prices_xrp[pricePtr][0] = average;
+  });
+  bidsXRP.on('model', (offersB) => {
+    const average = calcAverage(offersB, 20000, false);
+    prices_xrp[pricePtr][1] = average;
+
+    comparePrices_xrp(pricePtr, 'btsd');
+    comparePrices_xrp('btsd', pricePtr);
+
+  });
